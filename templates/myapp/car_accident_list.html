@@ -1,0 +1,49 @@
+<!-- myapp/templates/myapp/car_accident_list.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список ДТП</title>
+	<link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+
+</head>
+<body>
+
+        <p><a href="{% url 'person_list' %}">Список людей</a></p>
+    <p><a href="{% url 'car_accident_list' %}">Список ДТП</a></p>
+    <p><a href="{% url 'add_car_accident' %}">Добавить инцидент</a></p>
+    <p><a href="{% url 'jokes' %}">Одесские анекдоты</a></p> <!-- Ссылка на страницу анекдотов -->
+    <h1>Список ДТП</h1>
+
+    <!-- Блок для отображения сообщений -->
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <table border="1">
+        <tr>
+            <th>Марка</th>
+            <th>Гос. номер</th>
+            <th>Год выпуска</th>
+            <th>Дата последнего ДТП</th>
+            <th>Сумма выплаты</th>
+            <th>Пострадали ли пассажиры</th>
+        </tr>
+        {% for accident in accidents %}
+        <tr>
+            <td>{{ accident.brand }}</td>
+            <td>{{ accident.license_plate }}</td>
+            <td>{{ accident.year_of_manufacture }}</td>
+            <td>{{ accident.last_accident_date }}</td>
+            <td>{{ accident.compensation_amount }}</td>
+            <td>{{ accident.passengers_injured }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
