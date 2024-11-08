@@ -1,0 +1,40 @@
+<!-- myapp/templates/myapp/person_list.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+	<link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+    <title>Список людей</title>
+</head>
+<body>
+
+        <p><a href="{% url 'person_list' %}">Список людей</a></p>
+    <p><a href="{% url 'car_accident_list' %}">Список ДТП</a></p>
+    <p><a href="{% url 'add_car_accident' %}">Добавить инцидент</a></p>
+    <p><a href="{% url 'jokes' %}">Одесские анекдоты</a></p> <!-- Ссылка на страницу анекдотов -->
+    <h1>Список людей</h1>
+    <table border="1">
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Отчество</th>
+            <th>Серия паспорта</th>
+            <th>Номер паспорта</th>
+            <th>Дата рождения</th>
+            <th>Город проживания</th>
+        </tr>
+        {% for person in persons %}
+        <tr>
+            <td>{{ person.first_name }}</td>
+            <td>{{ person.last_name }}</td>
+            <td>{{ person.middle_name }}</td>
+            <td>{{ person.passport_series }}</td>
+            <td>{{ person.passport_number }}</td>
+            <td>{{ person.birth_date }}</td>
+            <td>{{ person.city }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
