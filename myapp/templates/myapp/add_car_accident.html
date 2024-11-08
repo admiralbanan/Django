@@ -1,0 +1,22 @@
+<!-- myapp/templates/myapp/add_car_accident.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+    <meta charset="UTF-8">
+    <title>Добавить информацию о ДТП</title>
+</head>
+<body>
+
+    <p><a href="{% url 'person_list' %}">Список людей</a></p>
+    <p><a href="{% url 'car_accident_list' %}">Список ДТП</a></p>
+    <h1>Добавить информацию о ДТП</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить</button>
+    </form>
+    <p><a href="{% url 'car_accident_list' %}">Назад к списку ДТП</a></p>
+</body>
+</html>

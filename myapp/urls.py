@@ -3,5 +3,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('persons/', views.person_list, name='person_list'),  # URL для списка людей
+    path('', views.home, name='home'),
+    path('persons/', views.person_list, name='person_list'),
+    path('accidents/', views.car_accident_list, name='car_accident_list'),
+    path('add-accident/', views.add_car_accident, name='add_car_accident'),  # Новый URL для формы
 ]

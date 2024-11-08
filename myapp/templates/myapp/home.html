@@ -1,0 +1,16 @@
+<!-- myapp/templates/myapp/home.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+	<link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+    <title>Главная страница</title>
+</head>
+<body>
+    <h1>Добро пожаловать</h1>
+    <p><a href="{% url 'person_list' %}">Список людей</a></p>
+    <p><a href="{% url 'car_accident_list' %}">Список ДТП</a></p>
+    <p><a href="{% url 'add_car_accident' %}">Добавить инцидент</a></p> <!-- Новая ссылка на добавление инцидента -->
+</body>
+</html>
