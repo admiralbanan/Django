@@ -1,11 +1,16 @@
 <!-- myapp/templates/myapp/person_list.html -->
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+	<link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
     <title>Список людей</title>
 </head>
 <body>
+
+    <p><a href="{% url 'car_accident_list' %}">Список ДТП</a></p>
+    <p><a href="{% url 'add_car_accident' %}">Добавить инцидент</a></p> <!-- Новая ссылка на добавление инцидента -->
     <h1>Список людей</h1>
     <table border="1">
         <tr>
