@@ -1,0 +1,35 @@
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Мой сайт{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+</head>
+<body>
+    <header>
+        <!-- Навигация или шапка сайта -->
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'person_list' %}">Список людей</a></li>
+                <li><a href="{% url 'car_accident_list' %}">Список ДТП</a></li>
+                <li><a href="{% url 'add_car_accident' %}">Добавить инцидент</a></li>
+                <li><a href="{% url 'jokes' %}">Анекдоты</a></li>
+                <li><a href="{% url 'signup' %}">Регистрация</a></li>
+                <li><a href="{% url 'login' %}">Вход</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        <!-- Контент страницы -->
+        {% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 Мой сайт</p>
+    </footer>
+</body>
+</html>

@@ -1,7 +1,16 @@
-# myapp/urls.py
 from django.urls import path
-from . import views
+from myapp.views import (
+    PersonListView,
+    CarAccidentListView,
+    CarAccidentCreateView,
+    HomePageView,
+    JokesView
+)
 
 urlpatterns = [
-    path('persons/', views.person_list, name='person_list'),  # URL для списка людей
+    path('', HomePageView.as_view(), name='home'),
+    path('persons/', PersonListView.as_view(), name='person_list'),
+    path('accidents/', CarAccidentListView.as_view(), name='car_accident_list'),
+    path('add-accident/', CarAccidentCreateView.as_view(), name='add_car_accident'),
+    path('jokes/', JokesView.as_view(), name='jokes'),  # Новый URL для анекдотов
 ]
