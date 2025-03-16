@@ -7,6 +7,19 @@
 </head>
 <body>
     <h1>Список людей</h1>
+
+    <!-- Форма фильтрации -->
+    <form method="get">
+        <label for="city">Город:</label>
+        <input type="text" name="city" value="{{ request.GET.city }}">
+
+        <label for="last_name">Фамилия:</label>
+        <input type="text" name="last_name" value="{{ request.GET.last_name }}">
+
+        <button type="submit">Фильтровать</button>
+        <a href="{% url 'person_list' %}">Сбросить</a>
+    </form>
+
     <table border="1">
         <tr>
             <th>Имя</th>
@@ -19,15 +32,36 @@
         </tr>
         {% for person in persons %}
         <tr>
-            <td>{{ person.first_name }}</td>
-            <td>{{ person.last_name }}</td>
-            <td>{{ person.middle_name }}</td>
+            <td>{{ person.first_name|capfirst }}</td>
+            <td>{{ person.last_name|capfirst }}</td>
+            <td>{{ person.middle_name|capfirst }}</td>
             <td>{{ person.passport_series }}</td>
             <td>{{ person.passport_number }}</td>
-            <td>{{ person.birth_date }}</td>
+            <td>{{ person.birth_date|date:'d.m.Y' }}</td>
             <td>{{ person.city }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">Нет данных для отображения.</td>
         </tr>
         {% endfor %}
     </table>
+
+    <!-- Навигация по страницам -->
+    <div>
+        {% with request.GET.urlencode as query_params %}
+            {% if persons.has_previous %}
+                <a href="?{{ query_params }}&page=1">Первая</a>
+                <a href="?{{ query_params }}&page={{ persons.previous_page_number }}">Назад</a>
+            {% endif %}
+
+            <span>Страница {{ persons.number }} из {{ persons.paginator.num_pages }}</span>
+
+            {% if persons.has_next %}
+                <a href="?{{ query_params }}&page={{ persons.next_page_number }}">Вперед</a>
+                <a href="?{{ query_params }}&page={{ persons.paginator.num_pages }}">Последняя</a>
+            {% endif %}
+        {% endwith %}
+    </div>
 </body>
 </html>
